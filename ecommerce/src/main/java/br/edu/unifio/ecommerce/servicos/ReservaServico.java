@@ -77,6 +77,20 @@ public class ReservaServico {
     }
 
     @Transactional
+    public Reserva atualizar(Long id, Reserva dados) {
+        Reserva reserva = buscarPorId(id);
+
+        if (dados.getStatus() == null ||
+            !dados.getStatus().equals("CANCELADA")) {
+            throw new IllegalArgumentException(
+                "A atualização permite apenas cancelar a reserva");
+        }
+
+        reserva.setStatus("CANCELADA");
+        return reservas.save(reserva);
+    }
+
+    @Transactional
     public void excluir(Long id) {
         reservas.delete(buscarPorId(id));
     }

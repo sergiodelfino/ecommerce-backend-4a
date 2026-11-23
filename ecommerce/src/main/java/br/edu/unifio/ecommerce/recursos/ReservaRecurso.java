@@ -34,6 +34,13 @@ public class ReservaRecurso {
         return servico.cadastrar(reserva);
     }
 
+    @PutMapping("/{id}")
+    public Reserva atualizar(
+            @PathVariable Long id,
+            @RequestBody Reserva dados) {
+        return servico.atualizar(id, dados);
+    }
+
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void excluir(@PathVariable Long id) {
